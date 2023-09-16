@@ -1,17 +1,6 @@
 
 import { StyleSheet } from "react-native";
 import * as Font from "expo-font";
-import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
-
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Poppins_400Regular, 
-    Poppins_700Bold,     
-
-  });
-};
-loadFonts();
 
 
 
