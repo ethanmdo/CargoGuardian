@@ -42,7 +42,12 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
     }
 
     await getRiskPrediction();
-    navigation.navigate("Prediction", { predictionData: prediction });
+    navigation.navigate("Prediction", {
+      predictionData: prediction,
+      shipmentContent: shipmentContent,
+      route: route,
+      weather: weather,
+    });
   };
 
   return (
