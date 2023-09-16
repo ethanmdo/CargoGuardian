@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import * as Font from "expo-font";
-import { wrap } from "module";
 
 export const styles = StyleSheet.create({
   background: {
