@@ -28,32 +28,35 @@ const App: React.FC = () => {
 
   return (
     <LinearGradient
-    colors={["#FEDD00", "#005CBF"]}
-
+      colors={["#FEDD00", "#005CBF"]}
       style={styles.container} // Add your existing styles here
     >
       <View style={styles.container}>
         <Text style={styles.title}>Cargo Guardian</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Shipment Content"
-          value={shipmentContent}
-          onChangeText={(text) => setShipmentContent(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Route"
-          value={route}
-          onChangeText={(text) => setRoute(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Weather Conditions"
-          value={weather}
-          onChangeText={(text) => setWeather(text)}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Shipment Content"
+            value={shipmentContent}
+            onChangeText={(text) => setShipmentContent(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Route"
+            value={route}
+            onChangeText={(text) => setRoute(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Weather Conditions"
+            value={weather}
+            onChangeText={(text) => setWeather(text)}
+          />
 
-        <Button title="Predict Risk" onPress={getRiskPrediction} />
+  <View style={styles.button}>
+          <Button title="Predict Risk" onPress={getRiskPrediction} color="#FFFFFF"/>
+          </View>
+        </View>
 
         {prediction && (
           <Text style={styles.predictionText}>Risk: {prediction}</Text>

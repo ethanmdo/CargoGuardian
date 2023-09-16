@@ -5,9 +5,6 @@ import * as Font from 'expo-font';
 // Load custom fonts
 const loadFonts = async () => {
   await Font.loadAsync({
-    'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
-    'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
     'Montserrat': require('./assets/fonts/Montserrat-ExtraBold.ttf'),
   });
 };
@@ -22,13 +19,16 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
     padding: 20,
   },
   titleContainer: {
     flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: 20,
   },
   title: {
+    marginTop: 25,
     fontSize: 50,
     fontWeight: "bold",
     textAlign: "center",
@@ -37,17 +37,37 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flex: 2,
     justifyContent: "center",
+    alignItems: "center",
+
   },
   input: {
     height: 40,
+    width: "100%",
     borderColor: "black",
-    borderWidth: 1,
+    borderWidth: 3,
     marginBottom: 10,
     paddingHorizontal: 10,
   },
   predictionText: {
-    marginTop: 20,
-    fontSize: 30,
-    textAlign: "center",
+    width: '100%',
+    backgroundColor: '#005CBF',
+    padding: 15,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    color: '#FEDD00',
+    fontSize: 18,
+    fontFamily: 'OpenSans-Bold',
   },
+  button : {
+    width: '80%',
+    borderRadius: 20,
+    overflow: 'hidden',
+    marginTop: 20,
+    backgroundColor: 'black',
+    borderWidth: 2,
+    borderColor: "black",
+
+  }
 });
