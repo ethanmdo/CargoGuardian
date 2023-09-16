@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import axios from "axios";
 import { styles } from "./styles"; // Import styles from the new file
+import LinearGradient from 'react-native-linear-gradient';
 
 const App: React.FC = () => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
@@ -26,7 +27,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={['#0B486B', '#F56217']} style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Cargo Guardian</Text>
       </View>
@@ -56,6 +57,6 @@ const App: React.FC = () => {
           <Text style={styles.predictionText}>Risk: {prediction}</Text>
         )}
       </View>
-    </View>
+    </LinearGradient>
   );
 };
