@@ -12,7 +12,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import Prediction from "./Prediction";
-
 import { TransitionPresets } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import {
@@ -48,27 +47,27 @@ const App: React.FC = () => {
     </View>;
   } else {
     return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              headerShown: false,
-              ...TransitionPresets.ModalSlideFromBottomIOS,
-            }}
-          />
-          <Stack.Screen
-            name="Prediction"
-            component={Prediction}
-            options={{
-              headerTransparent: true,
-              headerTintColor: "black",
-              ...TransitionPresets.ModalSlideFromBottomIOS,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                headerShown: false,
+                ...TransitionPresets.ModalSlideFromBottomIOS,
+              }}
+            />
+            <Stack.Screen
+              name="Prediction"
+              component={Prediction}
+              options={{
+                headerTransparent: true,
+                headerTintColor: "black",
+                ...TransitionPresets.ModalSlideFromBottomIOS,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
     );
   }
 };
