@@ -9,6 +9,6 @@ public class PredictionController {
     @PostMapping("/predict-risk")
     public ResponseEntity<String> predictRisk(@RequestBody RiskRequest request) {
         // Your logic here
-        return ResponseEntity.ok("Your risk prediction response");
+        return ResponseEntity.ok("it works");
     }
 }
