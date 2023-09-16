@@ -115,6 +115,17 @@ export default function Poly() {
         let coords = decodePolyline(points);
         setRouteCoords(coords);
 
+        // Extract the destination coordinates from the API response
+        const endDestination = json.routes[0].legs[0].end_location;
+
+        // Adjust the map's view to focus on the destination coordinates
+        setRegion({
+          latitude: endDestination.lat,
+          longitude: endDestination.lng,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+
         const routeDistance = json.routes[0].legs[0].duration.value;
         const routeDurationTraffic =
           json.routes[0].legs[0].duration_in_traffic.value;
@@ -144,6 +155,7 @@ export default function Poly() {
       console.error(error);
     }
   };
+
   return (
     <View style={styles.container}>
       <MapView
