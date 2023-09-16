@@ -27,36 +27,53 @@ const App: React.FC = () => {
   };
 
   return (
-    <LinearGradient colors={['#0B486B', '#F56217']} style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Cargo Guardian</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Shipment Content"
-          value={shipmentContent}
-          onChangeText={(text) => setShipmentContent(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Route"
-          value={route}
-          onChangeText={(text) => setRoute(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Weather Conditions"
-          value={weather}
-          onChangeText={(text) => setWeather(text)}
-        />
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Shipment Content"
+        value={shipmentContent}
+        onChangeText={(text) => setShipmentContent(text)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Route"
+        value={route}
+        onChangeText={(text) => setRoute(text)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Weather Conditions"
+        value={weather}
+        onChangeText={(text) => setWeather(text)}
+      />
 
-        <Button title="Predict Risk" onPress={getRiskPrediction} />
+      <Button title="Predict Risk" onPress={getRiskPrediction} />
 
-        {prediction && (
-          <Text style={styles.predictionText}>Risk: {prediction}</Text>
-        )}
-      </View>
-    </LinearGradient>
+      {prediction && (
+        <Text style={styles.predictionText}>Risk: {prediction}</Text>
+      )}
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: "blue",
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  predictionText: {
+    marginTop: 20,
+    fontSize: 30,
+    textAlign: "center",
+  },
+});
+
+export default App;
