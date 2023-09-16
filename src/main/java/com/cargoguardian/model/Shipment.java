@@ -53,9 +53,9 @@ public class Shipment {
 
         double defaultScore = 100.0;
 
-        defaultScore = defaultScore - this.getFragileContentPercentage * 0.8;
-        defaultScore = defaultScore - this.getfoodItemContentPercentage * 0.4;
-        defaultScore = defaultScore - this.getLiquidItemContentPercentage * 0.4;
+        defaultScore = defaultScore - this.getFragileContentPercentage * 0.5;
+        defaultScore = defaultScore - this.getfoodItemContentPercentage * 0.15;
+        defaultScore = defaultScore - this.getLiquidItemContentPercentage * 0.15;
 
         if (defaultScore < 0)
         {
