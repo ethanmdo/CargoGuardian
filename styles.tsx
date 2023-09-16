@@ -1,7 +1,14 @@
 // styles.ts
 import { StyleSheet } from 'react-native';
 
+
 export const styles = StyleSheet.create({
+  gradientContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+   
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -14,8 +21,8 @@ export const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     textAlign: "center",
-    color: "purple",
-    padding: 50,
+    color: "white",
+    padding: 5,
   },
   inputContainer: {
     flex: 2,
