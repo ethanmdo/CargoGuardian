@@ -9,7 +9,7 @@ public class RoadCond {
     private String conditionName;
     private int conditionSeverity; // You can define severity based on road conditions
 
-    public RoadCondition(String conditionName) {
+    public RoadCond(String conditionName) {
         this.conditionName = conditionName;
         // You can set conditionSeverity based on the conditionName or the API response.
         this.conditionSeverity = determineSeverityFromAPI(conditionName);
