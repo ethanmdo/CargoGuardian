@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import axios from "axios";
 import { styles } from "./styles";
-import { LinearGradient } from "expo-linear-gradient";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { ImageBackground } from "react-native";
 
 const HomeScreen: React.FC = ({ navigation }: any) => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
@@ -29,44 +36,50 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
   };
 
   const press = async () => {
+    if (!shipmentContent || !route || !weather) {
+      alert("Please fill out all the boxes before proceeding.");
+      return;
+    }
+
     await getRiskPrediction();
     navigation.navigate("Prediction", { predictionData: prediction });
   };
 
   return (
-    <View style={styles.whole}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Cargo Guardian</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Shipment Content"
-            value={shipmentContent}
-            onChangeText={(text) => setShipmentContent(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Route"
-            value={route}
-            onChangeText={(text) => setRoute(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Weather Conditions"
-            value={weather}
-            onChangeText={(text) => setWeather(text)}
-          />
+    <ImageBackground
+      source={require("./assets/yellow.jpg")}
+      style={styles.background}
+    >
+      <View style={styles.whole}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Cargo Guardian</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Shipment Content"
+              value={shipmentContent}
+              onChangeText={(text) => setShipmentContent(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Route"
+              value={route}
+              onChangeText={(text) => setRoute(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Weather Conditions"
+              value={weather}
+              onChangeText={(text) => setWeather(text)}
+            />
 
-          <View style={styles.button}>
-            <Button title="Predict Risk" onPress={press} color="#FFFFFF" />
+            <TouchableOpacity style={styles.button} onPress={press}>
+              <Text style={styles.buttonText}>Predict Risk</Text>
+            </TouchableOpacity>
           </View>
         </View>
-
-        {prediction && (
-          <Text style={styles.predictionText}>Risk: {prediction}</Text>
-        )}
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
