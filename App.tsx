@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import axios from "axios";
+import { styles } from "./styles"; // Import styles from the new file
 
 const App: React.FC = () => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
@@ -26,52 +27,35 @@ const App: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Shipment Content"
-        value={shipmentContent}
-        onChangeText={(text) => setShipmentContent(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Route"
-        value={route}
-        onChangeText={(text) => setRoute(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Weather Conditions"
-        value={weather}
-        onChangeText={(text) => setWeather(text)}
-      />
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Cargo Guardian</Text>
+      </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Shipment Content"
+          value={shipmentContent}
+          onChangeText={(text) => setShipmentContent(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Route"
+          value={route}
+          onChangeText={(text) => setRoute(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Weather Conditions"
+          value={weather}
+          onChangeText={(text) => setWeather(text)}
+        />
 
-      <Button title="Predict Risk" onPress={getRiskPrediction} />
+        <Button title="Predict Risk" onPress={getRiskPrediction} />
 
-      {prediction && (
-        <Text style={styles.predictionText}>Risk: {prediction}</Text>
-      )}
+        {prediction && (
+          <Text style={styles.predictionText}>Risk: {prediction}</Text>
+        )}
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: "blue",
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  predictionText: {
-    marginTop: 20,
-    fontSize: 30,
-    textAlign: "center",
-  },
-});
-
-export default App;
