@@ -38,10 +38,14 @@ public class Shipment {
         return this.liquidItemContentPercentage;
     }
 
-    public void setFragileContentPercentage(int newPercent)
+    public void setLiquidItemContentPercentage(int newPercent)
     {
         this.liquidItemContentPercentage = newPercent;
     }
+
+    
+
+
 
 
 }
