@@ -1,18 +1,18 @@
-// styles.ts
-import { StyleSheet } from "react-native";
-import * as Font from 'expo-font';
 
-// Load custom fonts
+import { StyleSheet } from "react-native";
+import * as Font from "expo-font";
+
 const loadFonts = async () => {
   await Font.loadAsync({
-    'Montserrat': require('./assets/fonts/Montserrat-ExtraBold.ttf'),
+    Montserrat: require("./assets/fonts/Montserrat-ExtraBold.ttf"),
   });
 };
-
-// Load fonts when the app starts
 loadFonts();
+
+
+
 export const styles = StyleSheet.create({
-  gradientContainer: {
+  whole: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "center",
     alignItems: "center",
-
   },
   input: {
     height: 40,
@@ -49,25 +48,24 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   predictionText: {
-    width: '100%',
-    backgroundColor: '#005CBF',
+    width: "100%",
+    backgroundColor: "#005CBF",
     padding: 15,
     borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 10,
-    color: '#FEDD00',
+    color: "#FEDD00",
     fontSize: 18,
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: "OpenSans-Bold",
   },
-  button : {
-    width: '80%',
+  button: {
+    width: "80%",
     borderRadius: 20,
-    overflow: 'hidden',
+    overflow: "hidden",
     marginTop: 20,
-    backgroundColor: 'black',
+    backgroundColor: "black",
     borderWidth: 2,
     borderColor: "black",
-
-  }
+  },
 });
