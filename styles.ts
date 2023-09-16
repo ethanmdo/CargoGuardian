@@ -1,11 +1,14 @@
 // styles.ts
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     padding: 20,
+  },
+  titleContainer: {
+    flex: 1,
   },
   title: {
     fontSize: 50,
@@ -15,6 +18,7 @@ export const styles = StyleSheet.create({
     padding: 50,
   },
   inputContainer: {
+    flex: 2,
     justifyContent: "center",
   },
   input: {

@@ -29,9 +29,7 @@ const App: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.title}>
-    <Text style={styles.title}>Cargo Guardian</Text>
-    </View>
+      <Text style={styles.title}>Cargo Guardian</Text>
       <TextInput
         style={styles.input}
         placeholder="Shipment Content"
@@ -59,7 +57,5 @@ const App: React.FC = () => {
     </View>
   );
 };
-
-
 
 export default App;
