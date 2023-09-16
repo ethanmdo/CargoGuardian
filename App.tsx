@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
+  SafeAreaView,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -46,28 +47,27 @@ const App: React.FC = () => {
     </View>;
   } else {
     return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              headerStyle: { backgroundColor: "#181818" },
-              headerTintColor: "white",
-              ...TransitionPresets.ModalSlideFromBottomIOS,
-            }}
-          />
-          <Stack.Screen
-            name="Prediction"
-            component={Prediction}
-            options={{
-              headerStyle: { backgroundColor: "#181818" },
-              headerTintColor: "white",
-              ...TransitionPresets.ModalSlideFromBottomIOS,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                headerShown: false,
+                ...TransitionPresets.ModalSlideFromBottomIOS,
+              }}
+            />
+            <Stack.Screen
+              name="Prediction"
+              component={Prediction}
+              options={{
+                headerTransparent: true,
+                headerTintColor: "black",
+                ...TransitionPresets.ModalSlideFromBottomIOS,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
     );
   }
 };
