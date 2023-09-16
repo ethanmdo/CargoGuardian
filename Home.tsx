@@ -12,6 +12,7 @@ import { styles } from "./styles";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ImageBackground } from "react-native";
+import Poly from "./Poly";
 
 const HomeScreen: React.FC = ({ navigation }: any) => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
