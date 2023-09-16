@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   predictionText: {
     marginTop: 20,
-    fontSize: 18,
+    fontSize: 30,
     textAlign: "center",
   },
 });
