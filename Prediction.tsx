@@ -18,19 +18,19 @@ const Prediction: React.FC = () => {
           </View>
         </View>
         <View style={styles.bottomCirclesContainer}>
-          <View>
+          <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Shipment Content</Text>
             <View style={styles.circle}>
               <Text style={styles.circleText}>{"0%"}</Text>
             </View>
           </View>
-          <View>
+          <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Route</Text>
             <View style={styles.circle}>
               <Text style={styles.circleText}>{"0%"}</Text>
             </View>
           </View>
-          <View>
+          <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Weather Conditions</Text>
             <View style={styles.circle}>
               <Text style={styles.circleText}>{"0%"}</Text>

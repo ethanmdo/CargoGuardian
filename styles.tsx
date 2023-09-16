@@ -117,4 +117,10 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
   },
+  capCircle: {
+    flexDirection: 'column',
+  alignItems: 'center',     // Horizontal alignment
+  justifyContent: 'center', // Vertical alignment
+  flex: 1,         
+  }
 });
