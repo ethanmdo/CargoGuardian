@@ -13,5 +13,35 @@ public class Shipment {
         this.liquidItemContentPercentage = liquidPercent;
     }
 
+    public int getFragileContentPercentage()
+    {
+        return this.fragileContentPercentage;
+    }
+
+    public void setFragileContentPercentage(int newPercent)
+    {
+        this.fragileContentPercentage = newPercent;
+    }
+
+    public int getfoodItemContentPercentage()
+    {
+        return this.foodItemContentPercentage;
+    }
+
+    public void setfoodItemContentPercentage(int newPercent)
+    {
+        this.foodItemContentPercentageContentPercentage = newPercent;
+    }
+
+    public int getLiquidItemContentPercentage()
+    {
+        return this.liquidItemContentPercentage;
+    }
+
+    public void setFragileContentPercentage(int newPercent)
+    {
+        this.liquidItemContentPercentage = newPercent;
+    }
+
 
 }
