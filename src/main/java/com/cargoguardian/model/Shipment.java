@@ -43,6 +43,16 @@ public class Shipment {
         this.liquidItemContentPercentage = newPercent;
     }
 
+    public String validPercentageAmount()
+    {
+        if (this.getFragileContentPercentage() + this.getfoodItemContentPercentage() + this.getLiquidItemContentPercentage() != 100)
+        {
+            return "Please enter percentage values amounting to 100";
+        }
+
+        return "Valid percentage values";
+    }
+    
     public int getSafetyScore()
     {
         return 0;
