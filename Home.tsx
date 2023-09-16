@@ -22,7 +22,7 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
   const getRiskPrediction = async () => {
     try {
       const response = await axios.post<string>(
-        "http://localhost:8081/predict-risk",
+        "http://localhost:8080/predict-risk",
         {
           shipmentContent,
           route,
