@@ -28,9 +28,8 @@ const App: React.FC = () => {
 
   return (
     <LinearGradient
-      colors={["#FFFFFF", "#9EFFF5", "#00CED1"]}
-      start={{ x: 0.0, y: 0.5 }} // Horizontal start point
-      end={{ x: 1.0, y: 0.5 }} // Horizontal end point // Example colors, customize as needed
+    colors={["#FEDD00", "#005CBF"]}
+
       style={styles.container} // Add your existing styles here
     >
       <View style={styles.container}>

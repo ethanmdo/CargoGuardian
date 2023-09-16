@@ -1,13 +1,24 @@
 // styles.ts
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+import * as Font from 'expo-font';
 
+// Load custom fonts
+const loadFonts = async () => {
+  await Font.loadAsync({
+    'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
+    'Montserrat': require('./assets/fonts/Montserrat-ExtraBold.ttf'),
+  });
+};
 
+// Load fonts when the app starts
+loadFonts();
 export const styles = StyleSheet.create({
   gradientContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-   
+    justifyContent: "center",
+    alignItems: "center",
   },
   container: {
     flex: 1,
@@ -21,8 +32,7 @@ export const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     textAlign: "center",
-    color: "white",
-    padding: 5,
+    fontFamily: "Montserrat",
   },
   inputContainer: {
     flex: 2,
@@ -30,7 +40,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: "grey",
+    borderColor: "black",
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
