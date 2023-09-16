@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   container: {
     flex: 1,
@@ -42,7 +43,7 @@ export const styles = StyleSheet.create({
   input: {
     height: 40,
     width: "100%",
-    borderColor: "black",
+    borderColor: "#181818",
     borderWidth: 3,
     marginBottom: 10,
     paddingHorizontal: 10,
@@ -64,8 +65,8 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     marginTop: 20,
-    backgroundColor: "black",
+    backgroundColor: "#181818",
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#181818",
   },
 });
