@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Road from "./Road";
+import Poly from "./Poly";
 import Home from "./Home";
 
 type PredictionRouteParams = {
@@ -35,8 +35,8 @@ const Prediction: React.FC = ({ navigation }: any) => {
   } = route.params;
 
   const Stack = createStackNavigator();
-  const navigateToRoad = () => {
-    navigation.navigate("Road"); // "Road" should match the name of your "Road" screen in the navigator
+  const navigateToPoly = () => {
+    navigation.navigate("Poly"); // "Road" should match the name of your "Road" screen in the navigator
   };
   return (
     <ImageBackground
@@ -68,7 +68,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Weather Conditions</Text>
 
-            <TouchableOpacity onPress={navigateToRoad}>
+            <TouchableOpacity onPress={navigateToPoly}>
               <View style={styles.circle}>
                 <Text style={styles.circleText}>{weather}</Text>
               </View>

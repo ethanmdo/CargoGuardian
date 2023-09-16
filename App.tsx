@@ -13,14 +13,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import Prediction from "./Prediction";
-import Road from "./Road";
+import Poly from "./Poly";
 import { TransitionPresets } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-
 
 const Stack = createStackNavigator();
 const App: React.FC = () => {
@@ -70,7 +69,7 @@ const App: React.FC = () => {
               ...TransitionPresets.ModalSlideFromBottomIOS,
             }}
           />
-          <Stack.Screen name="Road" component={Road} />
+          <Stack.Screen name="Poly" component={Poly} />
         </Stack.Navigator>
       </NavigationContainer>
     );

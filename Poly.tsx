@@ -13,7 +13,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import Prediction from "./Prediction";
-import Road from "./Road";
 import { TransitionPresets } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import {
@@ -71,7 +70,12 @@ function decodePolyline(encoded: string) {
 }
 
 export default function Poly() {
-  const [region, setRegion] = useState<Coordinate | null>(null);
+  const [region, setRegion] = useState({
+    latitude: 37.78825, // default latitude
+    longitude: -122.4324, // default longitude
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
   const [routeCoords, setRouteCoords] = useState<Coordinate[]>([]);
   const [originInput, setOriginInput] = useState<string>(""); // For inputting origin
   const [destinationInput, setDestinationInput] = useState<string>(""); // For inputting destination
@@ -79,8 +83,8 @@ export default function Poly() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('Permission to access location was denied');
+      if (status !== "granted") {
+        Alert.alert("Permission to access location was denied");
         return;
       }
 
@@ -88,17 +92,19 @@ export default function Poly() {
       setRegion({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
+        latitudeDelta: 0.0922, // You might want to adjust these deltas
+        longitudeDelta: 0.0421,
       });
     })();
   }, []);
 
   const checkRoute = async () => {
     if (!originInput.trim() || !destinationInput.trim()) {
-      Alert.alert('Error', 'Please provide both origin and destination.');
+      Alert.alert("Error", "Please provide both origin and destination.");
       return;
     }
 
-    const apiUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${originInput}&destination=${destinationInput}&traffic_model=pessimistic&departure_time=now&key=YOUR_API_KEY_HERE`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${originInput}&destination=${destinationInput}&traffic_model=pessimistic&departure_time=now&key=AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00`;
 
     try {
       let result = await fetch(apiUrl);
@@ -110,9 +116,11 @@ export default function Poly() {
         setRouteCoords(coords);
 
         const routeDistance = json.routes[0].legs[0].duration.value;
-        const routeDurationTraffic = json.routes[0].legs[0].duration_in_traffic.value;
+        const routeDurationTraffic =
+          json.routes[0].legs[0].duration_in_traffic.value;
         const routeHighwayAvoidance = json.routes[0].legs[0].steps.some(
-          (step: any) => step.maneuver === 'ramp-right' || step.maneuver === 'ramp-left'
+          (step: any) =>
+            step.maneuver === "ramp-right" || step.maneuver === "ramp-left"
         );
 
         let riskScore = 100;
@@ -126,11 +134,11 @@ export default function Poly() {
         }
 
         Alert.alert(
-          'Route Check',
+          "Route Check",
           `Based on the route's traffic and road conditions, there's a ${riskScore}% chance of risk. Consider checking alternate routes!`
         );
       } else {
-        Alert.alert('Error', 'No route found. Please check the addresses.');
+        Alert.alert("Error", "No route found. Please check the addresses.");
       }
     } catch (error) {
       console.error(error);
@@ -138,7 +146,11 @@ export default function Poly() {
   };
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={region} onRegionChangeComplete={setRegion}>
+      <MapView
+        style={styles.map}
+        region={region}
+        onRegionChangeComplete={setRegion}
+      >
         {routeCoords.length > 0 && (
           <Polyline
             coordinates={routeCoords}
@@ -151,52 +163,56 @@ export default function Poly() {
         <GooglePlacesAutocomplete
           placeholder="Enter starting address"
           minLength={2}
-          autoFocus={false}
-          returnKeyType={'default'}
+          textInputProps={{
+            autoFocus: false, // autofocus is set to false
+            returnKeyType: "next", // when the user presses the "next" button on the keyboard, it can move to the next input
+          }}
           fetchDetails={true}
           onPress={(data, details = null) => {
             // Handle starting address selection
             setOriginInput(data.description);
           }}
           query={{
-            key: 'YOUR_API_KEY_HERE',
-            language: 'en',
+            key: "AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00",
+            language: "en",
           }}
           styles={{
             textInputContainer: {
-              width: '100%',
+              width: "100%",
             },
             description: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
             },
             predefinedPlacesDescription: {
-              color: '#1faadb',
+              color: "#1faadb",
             },
           }}
         />
         <GooglePlacesAutocomplete
           placeholder="Enter destination address"
           minLength={2}
-          autoFocus={false}
-          returnKeyType={'default'}
+          textInputProps={{
+            autoFocus: false, // autofocus is set to false
+            returnKeyType: "done", // indicates the user is done with input
+          }}
           fetchDetails={true}
           onPress={(data, details = null) => {
             // Handle destination address selection
             setDestinationInput(data.description);
           }}
           query={{
-            key: 'YOUR_API_KEY_HERE',
-            language: 'en',
+            key: "AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00",
+            language: "en",
           }}
           styles={{
             textInputContainer: {
-              width: '100%',
+              width: "100%",
             },
             description: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
             },
             predefinedPlacesDescription: {
-              color: '#1faadb',
+              color: "#1faadb",
             },
           }}
         />
@@ -212,29 +228,29 @@ export default function Poly() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
   map: {
     flex: 1,
     ...StyleSheet.absoluteFillObject,
   },
   inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 10,
     marginBottom: 20,
-    width: '90%',
+    width: "90%",
   },
   textInput: {
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     padding: 8,
-    width: '48%',
+    width: "48%",
     borderRadius: 5,
   },
   buttonContainer: {
-    width: '90%',
+    width: "90%",
   },
 });
