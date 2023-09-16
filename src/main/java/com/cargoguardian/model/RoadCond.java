@@ -14,7 +14,7 @@ public class RoadCond {
         this.conditionSeverity = determineSeverityFromAPI(conditionName);
     }
 
-    private double determineSeverityFromAPI(String conditionName) {
+    private int determineSeverityFromAPI(String conditionName) {
         try {
             // Use Google Maps API to fetch road condition data (traffic)
             GeoApiContext context = new GeoApiContext.Builder().apiKey("YOUR_GOOGLE_MAPS_API_KEY").build();
@@ -29,7 +29,7 @@ public class RoadCond {
         }
     }
 
-    public double getSafetyScore() {
+    public int getSafetyScore() {
         return conditionSeverity;
     }
 }

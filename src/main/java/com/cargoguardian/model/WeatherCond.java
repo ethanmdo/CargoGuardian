@@ -9,8 +9,8 @@ public class WeatherCond {
         this.s = placeholder
     }
 
-    public double getSafetyScore()
+    public int getSafetyScore()
     {
-        return 0.0;
+        return 0;
     }
 }

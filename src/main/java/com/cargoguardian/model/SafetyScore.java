@@ -13,19 +13,21 @@ public class SafetyScore{
         this.r = r;
     }
 
-    public Shipment getShipmentScore()
+    public int getShipmentScore()
     {
         return this.s.getSafetyScore();
     }
 
-    public WeatherCond getWeatherConditionsScore()
+    public int getWeatherConditionsScore()
     {
         return this.w.getSafetyScore();
     }
 
-    public RoadCond getRoadConditionsScore()
+    public int getRoadConditionsScore()
     {
         return this.r.getSafetyScore();
     }
 
+    public double overallSafetyScoreOutput()
+        
 }
