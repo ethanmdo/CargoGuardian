@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import axios from "axios";
-import { styles } from "./styles"; // Import the styles
+import {styles} from "./styles"; // Import the styles
+
+
 
 const App: React.FC = () => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
@@ -27,7 +29,9 @@ const App: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cargo Guardian</Text>
+      <View style={styles.title}>
+    <Text style={styles.title}>Cargo Guardian</Text>
+    </View>
       <TextInput
         style={styles.input}
         placeholder="Shipment Content"
@@ -55,5 +59,7 @@ const App: React.FC = () => {
     </View>
   );
 };
+
+
 
 export default App;
