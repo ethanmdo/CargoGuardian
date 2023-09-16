@@ -12,6 +12,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import Prediction from "./Prediction";
+import Road from "./Road";
 import { TransitionPresets } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import {
@@ -40,34 +41,36 @@ const App: React.FC = () => {
   }, []);
 
   if (!fontsLoaded) {
-    return;
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" color="#0000ff" />
-      <Text>Loading...</Text>
-    </View>;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading...</Text>
+      </View>
+    );
   } else {
     return (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{
-                headerShown: false,
-                ...TransitionPresets.ModalSlideFromBottomIOS,
-              }}
-            />
-            <Stack.Screen
-              name="Prediction"
-              component={Prediction}
-              options={{
-                headerTransparent: true,
-                headerTintColor: "black",
-                ...TransitionPresets.ModalSlideFromBottomIOS,
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              headerShown: false,
+              ...TransitionPresets.ModalSlideFromBottomIOS,
+            }}
+          />
+          <Stack.Screen
+            name="Prediction"
+            component={Prediction}
+            options={{
+              headerTransparent: true,
+              headerTintColor: "black",
+              ...TransitionPresets.ModalSlideFromBottomIOS,
+            }}
+          />
+          <Stack.Screen name="Road" component={Road} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 };

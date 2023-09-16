@@ -1,10 +1,18 @@
 import React from "react";
-import { View, Text, SafeAreaView, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute, RouteProp } from "@react-navigation/native";
-
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Road from "./Road";
+import Home from "./Home";
 
 type PredictionRouteParams = {
   predictionData: string;
@@ -12,12 +20,13 @@ type PredictionRouteParams = {
   route: string;
   weather: string;
 };
-const Prediction: React.FC = () => {
+
+const Prediction: React.FC = ({ navigation }: any) => {
   const topPercentage = "25%";
   const percentages = ["50%", "75%", "100%"];
 
   const route =
-  useRoute<RouteProp<{ Prediction: PredictionRouteParams }, "Prediction">>();
+    useRoute<RouteProp<{ Prediction: PredictionRouteParams }, "Prediction">>();
   const {
     predictionData,
     shipmentContent,
@@ -25,7 +34,10 @@ const Prediction: React.FC = () => {
     weather,
   } = route.params;
 
-  const navigation = useNavigation();
+  const Stack = createStackNavigator();
+  const navigateToRoad = () => {
+    navigation.navigate("Road"); // "Road" should match the name of your "Road" screen in the navigator
+  };
   return (
     <ImageBackground
       source={require("./assets/yellow.jpg")}
@@ -41,21 +53,26 @@ const Prediction: React.FC = () => {
         <View style={styles.bottomCirclesContainer}>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Shipment Content</Text>
+
             <View style={styles.circle}>
               <Text style={styles.circleText}>{shipmentContent}</Text>
             </View>
           </View>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Route</Text>
+
             <View style={styles.circle}>
               <Text style={styles.circleText}>{shipmentRoute}</Text>
             </View>
           </View>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Weather Conditions</Text>
-            <View style={styles.circle}>
-              <Text style={styles.circleText}>{weather}</Text>
-            </View>
+
+            <TouchableOpacity onPress={navigateToRoad}>
+              <View style={styles.circle}>
+                <Text style={styles.circleText}>{weather}</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
