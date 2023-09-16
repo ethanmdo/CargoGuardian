@@ -18,7 +18,7 @@ public class ShipmentController {
         return "Shipment created successfully";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/predict-risk")
     public Shipment getShipment(@PathVariable int id) {
         if (id >= 0 && id < shipments.size()) {
             return shipments.get(id);
