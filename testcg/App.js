@@ -1,7 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button, Alert, TextInput } from 'react-native';
 import MapView, { Polyline } from 'react-native-maps';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
+
+function decodePolyline(encoded) {
+  let index = 0, lat = 0, lng = 0, coordinates = [], shift = 0, result = 0, byte = null, latitude_change, longitude_change;
+
+  while (index < encoded.length) {
+    byte = null;
+    shift = 0;
+    result = 0;
+    do {
+      byte = encoded.charCodeAt(index++) - 63;
+      result |= (byte & 0x1F) << shift;
+      shift += 5;
+    } while (byte >= 0x20);
+
+    latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+    shift = result = 0;
+
+    do {
+      byte = encoded.charCodeAt(index++) - 63;
+      result |= (byte & 0x1F) << shift;
+      shift += 5;
+    } while (byte >= 0x20);
+
+    longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+    lat += latitude_change;
+    lng += longitude_change;
+
+    coordinates.push({ latitude: lat / 100000.0, longitude: lng / 100000.0 });
+  }
+
+  return coordinates;
+}
+
+
 
 export default function App() {
   const [region, setRegion] = useState(null);
@@ -33,7 +69,7 @@ export default function App() {
       return;
     }
 
-    const apiUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${originInput}&destination=${destinationInput}&traffic_model=pessimistic&key=AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${originInput}&destination=${destinationInput}&traffic_model=pessimistic&departure_time=now&key=AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00`;
 
     try {
       let result = await fetch(apiUrl);
@@ -63,7 +99,7 @@ export default function App() {
           `Based on the route's traffic and road conditions, there's a ${damageScore}% chance of damage. Consider checking alternate routes!`
         );
       } else {
-        Alert.alert("Error", "No route found. Please check the addresses.");
+        Alert.alert("Error", "No route found. askfnaksjnfkjsadfjk  Please check the addresses.");
       }
     } catch (error) {
       console.error(error);
@@ -87,19 +123,62 @@ export default function App() {
         )}
       </MapView>
       <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Enter starting address"
-          style={styles.textInput}
-          onChangeText={text => setOriginInput(text)}
-          value={originInput}
-        />
-        <TextInput
-          placeholder="Enter destination address"
-          style={styles.textInput}
-          onChangeText={text => setDestinationInput(text)}
-          value={destinationInput}
-        />
-      </View>
+  <GooglePlacesAutocomplete
+    placeholder="Enter starting address"
+    minLength={2}
+    autoFocus={false}
+    returnKeyType={'default'}
+    fetchDetails={true}
+    onPress={(data, details = null) => {
+      // Handle starting address selection
+      setOriginInput(data.description);  // Update the originInput state with the selected address description
+    }}
+    
+    query={{
+      key: 'AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00',
+      language: 'en',
+    }}
+    styles={{
+      textInputContainer: {
+        width: '100%',
+      },
+      description: {
+        fontWeight: 'bold',
+      },
+      predefinedPlacesDescription: {
+        color: '#1faadb',
+      },
+    }}
+  />
+  <GooglePlacesAutocomplete
+    placeholder="Enter destination address"
+    minLength={2}
+    autoFocus={false}
+    returnKeyType={'default'}
+    fetchDetails={true}
+    onPress={(data, details = null) => {
+      // Handle destination address selection
+      setDestinationInput(data.description);  // Update the destinationInput state with the selected address description
+    }}
+    
+    query={{
+      key: 'AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00',
+      language: 'en',
+    }}
+    styles={{
+      textInputContainer: {
+        width: '100%',
+      },
+      description: {
+        fontWeight: 'bold',
+      },
+      predefinedPlacesDescription: {
+        color: '#1faadb',
+      },
+    }}
+  />
+</View>
+
       <View style={styles.buttonContainer}>
         <Button title="Check Route" onPress={checkRoute} />
       </View>
