@@ -28,6 +28,8 @@ public class SafetyScore{
         return this.r.getSafetyScore();
     }
 
-    public double overallSafetyScoreOutput()
-        
+    public int overallSafetyScoreOutput()
+    {
+        return 0;
+    }
 }

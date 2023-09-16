@@ -43,19 +43,26 @@ public class Shipment {
         this.liquidItemContentPercentage = newPercent;
     }
 
-    public String validPercentageAmount()
+    public double getSafetyScore()
     {
+
         if (this.getFragileContentPercentage() + this.getfoodItemContentPercentage() + this.getLiquidItemContentPercentage() != 100)
         {
-            return "Please enter percentage values amounting to 100";
+            throw new IllegalArgumentException("Please enter percentage values amounting to 100");
         }
 
-        return "Valid percentage values";
-    }
-    
-    public int getSafetyScore()
-    {
-        return 0;
+        double defaultScore = 100.0;
+
+        defaultScore = defaultScore - this.getFragileContentPercentage * 0.8;
+        defaultScore = defaultScore - this.getfoodItemContentPercentage * 0.4;
+        defaultScore = defaultScore - this.getLiquidItemContentPercentage * 0.4;
+
+        if (defaultScore < 0)
+        {
+            defaultScore = 0;
+        }
+
+        return defaultScore;
     }
 
 
