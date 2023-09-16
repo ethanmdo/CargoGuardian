@@ -12,16 +12,30 @@ const Prediction: React.FC = () => {
     >
       <View style={styles.circleContainer}>
         <View style={styles.topCircleContainer}>
+          <Text style={styles.circleCaption}>Overall Score</Text>
           <View style={styles.circle}>
             <Text style={styles.circleText}>{topPercentage}%</Text>
           </View>
         </View>
         <View style={styles.bottomCirclesContainer}>
-          {percentages.map((percentage, index) => (
-            <View key={index} style={styles.circle}>
-              <Text style={styles.circleText}>{percentage}</Text>
+          <View>
+            <Text style={styles.bCircleCaption}>Shipment Content</Text>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>{"0%"}</Text>
             </View>
-          ))}
+          </View>
+          <View>
+            <Text style={styles.bCircleCaption}>Route</Text>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>{"0%"}</Text>
+            </View>
+          </View>
+          <View>
+            <Text style={styles.bCircleCaption}>Weather Conditions</Text>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>{"0%"}</Text>
+            </View>
+          </View>
         </View>
       </View>
     </ImageBackground>

@@ -63,6 +63,26 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: "black",
   },
+
+  circleCaption: {
+    fontFamily: "Poppins_700Bold",
+    fontSize: 20,
+    color: "#FF6B6B", // Adjust color as per your requirement
+    textAlign: 'center',
+    flexWrap: "wrap",
+
+  },
+  bCircleCaption: {
+    fontFamily: "Poppins_700Bold",
+    fontSize: 12,
+    color: "#FF6B6B", // Adjust color as per your requirement
+    textAlign: 'center',    
+    flexWrap: "wrap", 
+    maxWidth: 100,
+    height: 25,
+    justifyContent: "center",
+    marginBottom: 10,
+  },
   circle: {
     width: 100, // Adjust size as needed
     height: 100, // Adjust size as needed
@@ -94,6 +114,7 @@ export const styles = StyleSheet.create({
   bottomCirclesContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });
