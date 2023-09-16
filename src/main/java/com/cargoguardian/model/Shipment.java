@@ -43,12 +43,10 @@ public class Shipment {
         this.liquidItemContentPercentage = newPercent;
     }
 
-    public double calculateSafetyScore(Shipment s, WeatherCond w, RoadCond r)
+    public double getSafetyScore()
     {
         return 0.0;
     }
-
-
 
 
 

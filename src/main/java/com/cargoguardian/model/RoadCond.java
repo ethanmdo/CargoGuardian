@@ -7,14 +7,14 @@ import com.google.maps.model.TravelMode;
 
 public class RoadCond { 
     private String conditionName;
-    private int conditionSeverity; 
+    private double conditionSeverity; 
 
     public RoadCond(String conditionName) {
         this.conditionName = conditionName;
         this.conditionSeverity = determineSeverityFromAPI(conditionName);
     }
 
-    private int determineSeverityFromAPI(String conditionName) {
+    private double determineSeverityFromAPI(String conditionName) {
         try {
             // Use Google Maps API to fetch road condition data (traffic)
             GeoApiContext context = new GeoApiContext.Builder().apiKey("YOUR_GOOGLE_MAPS_API_KEY").build();
@@ -29,7 +29,7 @@ public class RoadCond {
         }
     }
 
-    public int getConditionSeverity() {
+    public double getSafetyScore() {
         return conditionSeverity;
     }
 }
