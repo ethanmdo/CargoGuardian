@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     color: "#FEDD00",
     fontSize: 18,
-    fontFamily: "OpenSans-Bold",
+    fontFamily: "Montserrat",
   },
   button: {
     width: "80%",
