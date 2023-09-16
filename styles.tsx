@@ -15,12 +15,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  titleContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginBottom: 20,
-  },
+
   title: {
     marginTop: 25,
     fontSize: 50,
@@ -67,27 +62,24 @@ export const styles = StyleSheet.create({
   circleCaption: {
     fontFamily: "Poppins_700Bold",
     fontSize: 20,
-    color: "#FF6B6B", // Adjust color as per your requirement
-    textAlign: 'center',
+    color: "#FF6B6B",
+    textAlign: "center",
     flexWrap: "wrap",
-
   },
   bCircleCaption: {
     fontFamily: "Poppins_700Bold",
     fontSize: 12,
-    color: "#FF6B6B", // Adjust color as per your requirement
-    textAlign: 'center',    
-    flexWrap: "wrap", 
-    maxWidth: 100,
-    height: 25,
-    justifyContent: "center",
-    marginBottom: 10,
+    color: "#FF6B6B",
+    textAlign: "center",
+    flexWrap: "wrap",
+    marginBottom: 5,
   },
+
   circle: {
-    width: 100, // Adjust size as needed
-    height: 100, // Adjust size as needed
-    borderRadius: 50, // Half of the width/height to make it a circle
-    backgroundColor: "#FF6B6B", // Color of the circle
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: "#FF6B6B",
     justifyContent: "center",
     alignItems: "center",
     margin: 15,
@@ -105,6 +97,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
   },
   topCircleContainer: {
     flex: 1,
@@ -114,13 +107,15 @@ export const styles = StyleSheet.create({
   bottomCirclesContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: 20,
   },
   capCircle: {
-    flexDirection: 'column',
-  alignItems: 'center',     // Horizontal alignment
-  justifyContent: 'center', // Vertical alignment
-  flex: 1,         
-  }
+    flexDirection: "column",
+    alignItems: "center", 
+    justifyContent: "center", 
+    flex: 1,
+    marginTop: 15,
+  },
 });
