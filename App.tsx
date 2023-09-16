@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import axios from "axios";
-import { styles } from "./styles"; // Import styles from the new file
-import LinearGradient from 'react-native-linear-gradient';
+import { styles } from "./styles"; // Import the styles
 
 const App: React.FC = () => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
@@ -28,6 +27,7 @@ const App: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Cargo Guardian</Text>
       <TextInput
         style={styles.input}
         placeholder="Shipment Content"
@@ -55,25 +55,5 @@ const App: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: "blue",
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  predictionText: {
-    marginTop: 20,
-    fontSize: 30,
-    textAlign: "center",
-  },
-});
 
 export default App;
