@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
+  TouchableOpacity,
   Alert,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -172,48 +173,45 @@ export default function Poly() {
         )}
       </MapView>
       <View style={styles.inputContainer}>
-        <View style={styles.box}>
-          <GooglePlacesAutocomplete
-            placeholder="Enter starting address"
-            minLength={2}
-            textInputProps={{
-              autoFocus: false, // autofocus is set to false
-              returnKeyType: "next", // when the user presses the "next" button on the keyboard, it can move to the next input
-            }}
-            fetchDetails={true}
-            onPress={(data, details = null) => {
-              // Handle starting address selection
-              setOriginInput(data.description);
-            }}
-            query={{
-              key: "AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00",
-              language: "en",
-            }}
-          />
-        </View>
-        <View style={styles.box}>
-          <GooglePlacesAutocomplete
-            placeholder="Enter destination address"
-            minLength={2}
-            textInputProps={{
-              autoFocus: false, // autofocus is set to false
-              returnKeyType: "done", // indicates the user is done with input
-            }}
-            fetchDetails={true}
-            onPress={(data, details = null) => {
-              // Handle destination address selection
-              setDestinationInput(data.description);
-            }}
-            query={{
-              key: "AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00",
-              language: "en",
-            }}
-          />
-        </View>
-      </View>
+        <GooglePlacesAutocomplete
+          placeholder="Enter starting address"
+          minLength={2}
+          textInputProps={{
+            autoFocus: false, // autofocus is set to false
+            returnKeyType: "next", // when the user presses the "next" button on the keyboard, it can move to the next input
+          }}
+          fetchDetails={true}
+          onPress={(data, details = null) => {
+            // Handle starting address selection
+            setOriginInput(data.description);
+          }}
+          query={{
+            key: "AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00",
+            language: "en",
+          }}
+        />
 
-      <View style={styles.buttonContainer}>
-        <Button title="Check Route" onPress={checkRoute} />
+        <GooglePlacesAutocomplete
+          placeholder="Enter destination address"
+          minLength={2}
+          textInputProps={{
+            autoFocus: false, // autofocus is set to false
+            returnKeyType: "done", // indicates the user is done with input
+          }}
+          fetchDetails={true}
+          onPress={(data, details = null) => {
+            // Handle destination address selection
+            setDestinationInput(data.description);
+          }}
+          query={{
+            key: "AIzaSyAjFs26wQSTwsjVvRu6LTYugLOJb6n0i00",
+            language: "en",
+          }}
+        />
+
+        <TouchableOpacity style={styles.button} onPress={checkRoute}>
+          <Text style={styles.buttonText}>Check Route</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -222,55 +220,29 @@ export default function Poly() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
-    justifyContent: "flex-end", // This moves children to the bottom
-    alignItems: "center",
-    paddingBottom: 20,
+  },
+  inputContainer: {
+    position: "absolute",
+    bottom: 5,
+    width: 350,
+    alignSelf: "center", // This will center the inputContainer horizontally
+    flexDirection: "column",
   },
   map: {
     flex: 1,
     ...StyleSheet.absoluteFillObject,
   },
-  inputContainer: {
-    flexDirection: "row", // make children lay out horizontally
-    justifyContent: "space-between",
-    alignItems: "center", // this will center align items vertically
-    height: 30,
-    width: "90%",
-    marginBottom: 25,
-  },
-
-  box: {
-    flex: 1, // each child will take up half the space of the parent
-    height: "100%",
-    marginHorizontal: 5, // some space between the two boxes
-  },
-
-  textInput: {
-    width: "100%", // Take the full width of the parent
-    borderColor: "#ccc",
-    borderWidth: 1,
-    padding: 8,
-    borderRadius: 5,
-    marginBottom: 10, // Add some bottom margin for spacing between the inputs
-  },
-
-  buttonContainer: {
-    width: "90%",
-    backgroundColor: "#4CAF50",
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3, // for Android
+  button: {
+    margin: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "#FF6B6B",
+    borderRadius: 20,
   },
   buttonText: {
-    color: "#fff",
     fontSize: 18,
-    fontWeight: "600",
+    fontFamily: "Poppins_400Regular",
+    color: "black",
+    textAlign: "center",
   },
 });
