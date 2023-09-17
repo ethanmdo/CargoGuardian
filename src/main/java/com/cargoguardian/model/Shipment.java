@@ -5,10 +5,8 @@ public class Shipment {
     private int fragileContentPercentage;
     private int foodItemContentPercentage;
     private int liquidItemContentPercentage;
-<<<<<<< HEAD
+
     private int foodItemContentPercentageContentPercentage;
-=======
->>>>>>> 745abdecca923e65fb8ce0e4345e757d35647e76
     
     public Shipment(int fragPercent, int foodPercent, int liquidPercent)
     {
