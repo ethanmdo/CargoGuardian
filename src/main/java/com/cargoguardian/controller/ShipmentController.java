@@ -42,13 +42,14 @@ public class ShipmentController {
             throw new ShipmentNotFoundException("Shipment not found with id: " + id);
         }
     }
-    @GetMapping("/predict-weatherRisk")
-    public String getWeatherPrediction(@RequestParam String location) {
-        String apiKey = "59786d29bea323a72ae2853ab7e40e91";
-        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
 
-        if (location == null)
-        {
+    @PostMapping("/predict-weatherRisk")
+    public String getWeatherPrediction(@RequestBody String location) {
+        String apiKey = "59786d29bea323a72ae2853ab7e40e91";
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + location
+                + "&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
+
+        if (location == null) {
             url = "https://api.openweathermap.org/data/2.5/forecast?q=Blacksburg&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
         }
 
@@ -56,16 +57,16 @@ public class ShipmentController {
             RestTemplate restTemplate = new RestTemplate();
 
             URL weatherUrl = new URL(url);
-            HttpURLConnection http = (HttpURLConnection)weatherUrl.openConnection();
+            HttpURLConnection http = (HttpURLConnection) weatherUrl.openConnection();
 
             http.setRequestProperty("Accept", "application/json");
             http.setRequestProperty(
-                HttpHeaders.AUTHORIZATION, String.format("Bearer %s", apiKey));
+                    HttpHeaders.AUTHORIZATION, String.format("Bearer %s", apiKey));
 
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
-
-            String responseBody = new String(Objects.requireNonNull(response.getBody()).getBytes(), StandardCharsets.UTF_8);
+            String responseBody = new String(Objects.requireNonNull(response.getBody()).getBytes(),
+                    StandardCharsets.UTF_8);
 
             JsonParser jsonParser = new JsonParser();
 
@@ -73,8 +74,8 @@ public class ShipmentController {
 
             JsonObject asJsonObject = jsonObject.getAsJsonObject();
 
-            String weather = asJsonObject.get("list").getAsJsonArray().get(0).getAsJsonObject().get("weather").getAsJsonArray().get(0).getAsJsonObject().get("main").getAsString();
-
+            String weather = asJsonObject.get("list").getAsJsonArray().get(0).getAsJsonObject().get("weather")
+                    .getAsJsonArray().get(0).getAsJsonObject().get("main").getAsString();
 
             // jsonArray is what you parse
             return "Weather: " + weather;
@@ -85,12 +86,11 @@ public class ShipmentController {
 
     }
 
-    @GetMapping("/predict-shipmentRisk")
-    public double getShipmentPrediction(@RequestParam int fragile, @RequestParam int food, @RequestParam int liquid)
-    {
-        Shipment inputShipment = new Shipment(fragile, food, liquid);
+    @PostMapping("/predict-shipmentRisk")
+    public String getShipmentPrediction(@RequestParam String input) {
+        Shipment inputShipment = new Shipment(input);
 
-        return inputShipment.getSafetyScore();
+        return String.valueOf(inputShipment.getSafetyScore());
     }
 
     @PutMapping("/{id}")
