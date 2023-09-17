@@ -2,11 +2,11 @@ package com.cargoguardian.model;
 
 public class WeatherCond {
 
-    private s;
+    private String s;
 
     public WeatherCond(String placeholder)
     {
-        this.s = placeholder
+        this.s = placeholder;
     }
 
     public int getSafetyScore()

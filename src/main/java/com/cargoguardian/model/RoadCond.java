@@ -22,7 +22,7 @@ public class RoadCond {
             DirectionsResult result = request.await();
             // Extract relevant road condition data and calculate severity as needed
 
-            return /* Calculate severity based on data from DirectionsResult */;
+            return 0/* Calculate severity based on data from DirectionsResult */;
         } catch (Exception e) {
             e.printStackTrace();
             return 0; // Default severity in case of an error
@@ -30,6 +30,6 @@ public class RoadCond {
     }
 
     public int getSafetyScore() {
-        return conditionSeverity;
+        return (int)conditionSeverity;
     }
 }
