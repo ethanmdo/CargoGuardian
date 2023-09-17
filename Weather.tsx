@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-
 interface ForecastItem {
   dt: number;
   dt_txt: string;

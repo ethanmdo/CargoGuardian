@@ -145,7 +145,7 @@ export default function Poly() {
 
         Alert.alert(
           "Route Check",
-          `Based on the route's traffic and road conditions, there's a ${100 - riskScore
+          `Based on the route's traffic and road conditions, there's a ${110 - riskScore
           }% chance of risk. Consider checking alternate routes!`
         );
       } else {
