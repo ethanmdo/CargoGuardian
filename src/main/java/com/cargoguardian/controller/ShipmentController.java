@@ -42,8 +42,8 @@ public class ShipmentController {
             throw new ShipmentNotFoundException("Shipment not found with id: " + id);
         }
     }
-    @GetMapping("/predict-risk")
-    public String getPrediction(@RequestParam String location) {
+    @GetMapping("/predict-weatherRisk")
+    public String getWeatherPrediction(@RequestParam String location) {
         String apiKey = "59786d29bea323a72ae2853ab7e40e91";
         String uri = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
 
@@ -85,8 +85,8 @@ public class ShipmentController {
         return null;
     }
 
-    @GetMapping("/predict-risk")
-    public double getPrediction2(@RequestParam int fragile, @RequestParam int food, @RequestParam int liquid)
+    @GetMapping("/predict-shipmentRisk")
+    public double getShipmentPrediction(@RequestParam int fragile, @RequestParam int food, @RequestParam int liquid)
     {
         Shipment inputShipment = new Shipment(fragile, food, liquid);
 
