@@ -33,35 +33,32 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
   //     console.error("Error fetching prediction:", error);
   //   }
   // };
-  const getShipmentScore = async () => {
-    try {
-    const response = await fetch(
-    `http://localhost:8081/shipments/predict-shipmentRisk`,
-    {
-    method: "POST",
-    headers: {
-    "Content-Type": "text/plain",
-    },
-    body: shipmentContent, // Assuming shipmentContent holds the string
-    }
-    );
-    
-    
-    if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    
-    const shipmentScore = await response.text(); // Parse the plain text response
-    
-    
-    // Set the shipment score state
-    setShipmentContent(shipmentScore);
-    } catch (error) {
-    console.error("Error fetching shipment score:", error);
-    }
-    };
-    
+  // const getShipmentScore = async () => {
+  //   try {
+  //   const response = await fetch(
+  //   `http://localhost:8081/shipments/predict-shipmentRisk`,
+  //   {
+  //   method: "POST",
+  //   headers: {
+  //   "Content-Type": "text/plain",
+  //   },
+  //   body: shipmentContent, // Assuming shipmentContent holds the string
+  //   }
+  //   );
+
+  //   if (!response.ok) {
+  //   throw new Error(`HTTP error! Status: ${response.status}`);
+  //   }
+
+  //   const shipmentScore = await response.text(); // Parse the plain text response
+
+  //   // Set the shipment score state
+  //   setShipmentContent(shipmentScore);
+  //   } catch (error) {
+  //   console.error("Error fetching shipment score:", error);
+  //   }
+  //   };
+
   // const getCity = async () => {
   //   try {
   //     const response = await axios.get<string>(
@@ -74,7 +71,7 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
   // };
 
   const press = async () => {
-    await getShipmentScore();
+    //await getShipmentScore();
     //await getCity();
 
     if (!shipmentContent || !city) {
@@ -101,13 +98,10 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
-              placeholder="Shipment Content"
+              placeholder="Fragile Content"
               value={shipmentContent}
               onChangeText={(text) => setShipmentContent(text)}
             />
-            <Text style={styles.inputCap}>
-              Fragile, Food, Liquid: Format As "XX,XX,XX" And Should Add To 100
-            </Text>
             <TextInput
               style={styles.input}
               placeholder="City"

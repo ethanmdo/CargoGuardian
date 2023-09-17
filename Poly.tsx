@@ -136,16 +136,17 @@ export default function Poly() {
         let riskScore = 100;
 
         if (routeDurationTraffic > routeDistance) {
-          riskScore -= 20;
+          riskScore -= 10;
         }
 
         if (routeHighwayAvoidance) {
-          riskScore -= 30;
+          riskScore -= 20;
         }
 
         Alert.alert(
           "Route Check",
-          `Based on the route's traffic and road conditions, there's a ${riskScore}% chance of risk. Consider checking alternate routes!`
+          `Based on the route's traffic and road conditions, there's a ${100 - riskScore
+          }% chance of risk. Consider checking alternate routes!`
         );
       } else {
         Alert.alert("Error", "No route found. Please check the addresses.");
