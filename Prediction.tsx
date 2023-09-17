@@ -37,6 +37,10 @@ const Prediction: React.FC = ({ navigation }: any) => {
   const navigateToPoly = () => {
     navigation.navigate("Poly");
   };
+
+  const navigateToWeather = () => {
+    navigation.navigate("Weather");
+  };
   return (
     <ImageBackground
       source={require("./assets/yellow.jpg")}
@@ -70,7 +74,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Weather Conditions</Text>
 
-            <TouchableOpacity onPress={navigateToPoly}>
+            <TouchableOpacity onPress={navigateToWeather}>
               <View style={styles.circle}>
                 <Text style={styles.circleText}>{weather}</Text>
               </View>
@@ -78,7 +82,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={navigateToPoly}>
+          <TouchableOpacity style={styles.button} onPress={navigateToWeather}>
             <Text style={styles.buttonText}>See Weather</Text>
           </TouchableOpacity>
 

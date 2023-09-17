@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import Prediction from "./Prediction";
 import Poly from "./Poly";
+import Weather from "./Weather";
 import { TransitionPresets } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import {
@@ -70,6 +71,7 @@ const App: React.FC = () => {
             }}
           />
           <Stack.Screen name="Poly" component={Poly} />
+          <Stack.Screen name="Weather" component={Weather} />
         </Stack.Navigator>
       </NavigationContainer>
     );
