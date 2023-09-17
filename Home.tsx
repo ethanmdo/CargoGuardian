@@ -36,7 +36,7 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
   const getShipmentContent = async () => {
     try {
       const response = await axios.get<string>(
-        "http://localhost:8081/fetch-shipment-content"
+        "http://localhost:8081/predict-shipmentRisk"
       );
       setShipmentContent(response.data);
     } catch (error) {
@@ -46,7 +46,7 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
   const getCity = async () => {
     try {
       const response = await axios.get<string>(
-        "http://localhost:8081/fetch-city"
+        "http://localhost:8081/predict-weatherRisk"
       );
       setCity(response.data);
     } catch (error) {
