@@ -7,12 +7,13 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import Prediction from "./Prediction";
-
+import Poly from "./Poly";
 import { TransitionPresets } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import {
@@ -41,11 +42,12 @@ const App: React.FC = () => {
   }, []);
 
   if (!fontsLoaded) {
-    return;
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" color="#0000ff" />
-      <Text>Loading...</Text>
-    </View>;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading...</Text>
+      </View>
+    );
   } else {
     return (
       <NavigationContainer>
@@ -67,6 +69,7 @@ const App: React.FC = () => {
               ...TransitionPresets.ModalSlideFromBottomIOS,
             }}
           />
+          <Stack.Screen name="Poly" component={Poly} />
         </Stack.Navigator>
       </NavigationContainer>
     );

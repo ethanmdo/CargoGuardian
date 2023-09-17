@@ -84,22 +84,22 @@ export default function App() {
         const routeDurationTraffic = json.routes[0].legs[0].duration_in_traffic.value;
         const routeHighwayAvoidance = json.routes[0].legs[0].steps.some(step => step.maneuver === "ramp-right" || step.maneuver === "ramp-left");
 
-        let damageScore = 0;
+        let riskScore = 100;
 
         if (routeDurationTraffic > routeDistance) {
-          damageScore += 20;
+          riskScore -= 20;
         }
 
         if (routeHighwayAvoidance) {
-          damageScore += 30;
+          riskScore -= 30;
         }
 
         Alert.alert(
           "Route Check",
-          `Based on the route's traffic and road conditions, there's a ${damageScore}% chance of damage. Consider checking alternate routes!`
+          `Based on the route's traffic and road conditions, there's a ${riskScore}% chance of risk. Consider checking alternate routes!`
         );
       } else {
-        Alert.alert("Error", "No route found. askfnaksjnfkjsadfjk  Please check the addresses.");
+        Alert.alert("Error", "No route found. Please check the addresses.");
       }
     } catch (error) {
       console.error(error);
