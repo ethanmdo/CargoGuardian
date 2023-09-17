@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import * as Font from "expo-font";
 
 export const styles = StyleSheet.create({
   background: {
@@ -107,9 +106,8 @@ export const styles = StyleSheet.create({
   bottomCirclesContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
   capCircle: {
     flexDirection: "column",

@@ -23,7 +23,7 @@ type PredictionRouteParams = {
 
 const Prediction: React.FC = ({ navigation }: any) => {
   const topPercentage = "25%";
-  const percentages = ["50%", "75%", "100%"];
+
 
   const route =
     useRoute<RouteProp<{ Prediction: PredictionRouteParams }, "Prediction">>();
@@ -47,23 +47,25 @@ const Prediction: React.FC = ({ navigation }: any) => {
         <View style={styles.topCircleContainer}>
           <Text style={styles.circleCaption}>Overall Score</Text>
           <View style={styles.circle}>
-            <Text style={styles.circleText}>{topPercentage}%</Text>
+            <Text style={styles.circleText}>{predictionData}</Text>
           </View>
         </View>
         <View style={styles.bottomCirclesContainer}>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Shipment Content</Text>
-
-            <View style={styles.circle}>
-              <Text style={styles.circleText}>{shipmentContent}</Text>
-            </View>
+            <TouchableOpacity onPress={navigateToPoly}>
+              <View style={styles.circle}>
+                <Text style={styles.circleText}>{shipmentContent}</Text>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Route</Text>
-
-            <View style={styles.circle}>
-              <Text style={styles.circleText}>{shipmentRoute}</Text>
-            </View>
+            <TouchableOpacity onPress={navigateToPoly}>
+              <View style={styles.circle}>
+                <Text style={styles.circleText}>{shipmentRoute}</Text>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Weather Conditions</Text>
