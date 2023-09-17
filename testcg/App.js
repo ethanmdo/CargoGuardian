@@ -91,7 +91,7 @@ export default function App() {
         }
 
         if (routeHighwayAvoidance) {
-          riskcore -= 30;
+          riskScore -= 30;
         }
 
         Alert.alert(
