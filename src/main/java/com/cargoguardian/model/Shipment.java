@@ -7,10 +7,19 @@ public class Shipment {
     private int liquidItemContentPercentage;
 
     // Constructor
-    public Shipment(int fragilePercent, int foodPercent, int liquidPercent) {
-        this.fragileContentPercentage = fragilePercent;
-        this.foodItemContentPercentage = foodPercent;
-        this.liquidItemContentPercentage = liquidPercent;
+    public Shipment(String input) {
+        // Split the input string by comma
+        String[] percentages = input.split(",");
+
+        // Assuming the input is always correctly formatted as "##,##,##"
+        if (percentages.length == 3) {
+            this.fragileContentPercentage = Integer.parseInt(percentages[0].trim());
+            this.foodItemContentPercentage = Integer.parseInt(percentages[1].trim());
+            this.liquidItemContentPercentage = Integer.parseInt(percentages[2].trim());
+        } else {
+            // Handle error if input format is incorrect
+            throw new IllegalArgumentException("Input string format should be '##,##,##'");
+        }
     }
 
     // Getters and Setters
@@ -49,6 +58,6 @@ public class Shipment {
         defaultScore -= getFoodItemContentPercentage() * 0.15;
         defaultScore -= getLiquidItemContentPercentage() * 0.15;
 
-        return Math.max(defaultScore, 0);  // This ensures the score doesn't go below 0
+        return Math.max(defaultScore, 0); // This ensures the score doesn't go below 0
     }
 }
