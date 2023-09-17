@@ -48,7 +48,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
         <View style={styles.topCircleContainer}>
           <Text style={styles.circleCaption}>Overall Score</Text>
           <View style={styles.circle}>
-            <Text style={styles.circleText}>{Number(shipmentContent) - 13}</Text>
+            <Text style={styles.circleText}>{Number(shipmentContent) + 26}</Text>
           </View>
         </View>
 
@@ -57,7 +57,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
             <Text style={styles.bCircleCaption}>Shipment Content</Text>
             <TouchableOpacity onPress={navigateToPoly}>
               <View style={styles.circle}>
-                <Text style={styles.circleText}>{Number(shipmentContent) + 20}</Text>
+                <Text style={styles.circleText}>{Number(shipmentContent) + 5}</Text>
               </View>
             </TouchableOpacity>
           </View>
