@@ -18,19 +18,17 @@ type PredictionRouteParams = {
   predictionData: string;
   shipmentContent: string;
   route: string;
-  weather: string;
+  city: string;
 };
 
 const Prediction: React.FC = ({ navigation }: any) => {
-  const topPercentage = "25%";
-
   const route =
     useRoute<RouteProp<{ Prediction: PredictionRouteParams }, "Prediction">>();
   const {
     predictionData,
     shipmentContent,
     route: shipmentRoute,
-    weather,
+    city,
   } = route.params;
 
   const Stack = createStackNavigator();
@@ -64,19 +62,11 @@ const Prediction: React.FC = ({ navigation }: any) => {
             </TouchableOpacity>
           </View>
           <View style={styles.capCircle}>
-            <Text style={styles.bCircleCaption}>Route</Text>
-            <TouchableOpacity onPress={navigateToPoly}>
-              <View style={styles.circle}>
-                <Text style={styles.circleText}>{shipmentRoute}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.capCircle}>
-            <Text style={styles.bCircleCaption}>Weather Conditions</Text>
+            <Text style={styles.bCircleCaption}>City Conditions</Text>
 
             <TouchableOpacity onPress={navigateToWeather}>
               <View style={styles.circle}>
-                <Text style={styles.circleText}>{weather}</Text>
+                <Text style={styles.circleText}>{city}</Text>
               </View>
             </TouchableOpacity>
           </View>

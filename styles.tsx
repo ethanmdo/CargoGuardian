@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     borderColor: "#181818",
     borderWidth: 3,
-    marginBottom: 10,
+    marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 20,
     fontFamily: "Poppins_400Regular",
@@ -130,4 +130,8 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     marginBottom: 10,
   },
+  inputCap:{
+    fontSize: 10,
+    fontFamily: "Poppins_400Regular",
+  }
 });

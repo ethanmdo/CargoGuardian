@@ -16,8 +16,7 @@ import Poly from "./Poly";
 
 const HomeScreen: React.FC = ({ navigation }: any) => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
-  const [route, setRoute] = useState<string>("");
-  const [weather, setWeather] = useState<string>("");
+  const [city, setCity] = useState<string>("");
   const [prediction, setPrediction] = useState<string>("");
 
   const getRiskPrediction = async () => {
@@ -26,8 +25,7 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
         "http://localhost:8081/predict-risk",
         {
           shipmentContent,
-          route,
-          weatherConditions: weather,
+          cityConditions: city,
         }
       );
       setPrediction(response.data);
@@ -35,19 +33,41 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
       console.error("Error fetching prediction:", error);
     }
   };
+  const getShipmentContent = async () => {
+    try {
+      const response = await axios.get<string>(
+        "http://localhost:8081/fetch-shipment-content"
+      );
+      setShipmentContent(response.data);
+    } catch (error) {
+      console.error("Error fetching shipment content:", error);
+    }
+  };
+  const getCity = async () => {
+    try {
+      const response = await axios.get<string>(
+        "http://localhost:8081/fetch-city"
+      );
+      setCity(response.data);
+    } catch (error) {
+      console.error("Error fetching city:", error);
+    }
+  };
 
   const press = async () => {
-    if (!shipmentContent || !route || !weather) {
+    await getShipmentContent();
+    await getCity();
+
+    if (!shipmentContent || !city) {
       alert("Please fill out all the boxes before proceeding.");
       return;
     }
 
-    await getRiskPrediction();
+    await getCity();
     navigation.navigate("Prediction", {
       predictionData: prediction,
       shipmentContent: shipmentContent,
-      route: route,
-      weather: weather,
+      city: city,
     });
   };
 
@@ -66,19 +86,15 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
               value={shipmentContent}
               onChangeText={(text) => setShipmentContent(text)}
             />
+            <Text style={styles.inputCap}>
+              Fragile, Food, Liquid: Format As "XX,XX,XX" And Should Add To 100
+            </Text>
             <TextInput
               style={styles.input}
-              placeholder="Route"
-              value={route}
-              onChangeText={(text) => setRoute(text)}
+              placeholder="City"
+              value={city}
+              onChangeText={(text) => setCity(text)}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Weather Conditions"
-              value={weather}
-              onChangeText={(text) => setWeather(text)}
-            />
-
             <TouchableOpacity style={styles.button} onPress={press}>
               <Text style={styles.buttonText}>Predict Risk</Text>
             </TouchableOpacity>
