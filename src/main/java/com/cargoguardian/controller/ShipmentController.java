@@ -1,6 +1,7 @@
 package com.cargoguardian.controller;
 
 import com.cargoguardian.model.Shipment;
+import com.cargoguardian.model.Weather;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -86,11 +87,32 @@ public class ShipmentController {
     }
 
     @GetMapping("/predict-shipmentRisk")
-    public double getShipmentPrediction(@RequestParam int fragile, @RequestParam int food, @RequestParam int liquid)
-    {
-        Shipment inputShipment = new Shipment(fragile, food, liquid);
+    public ResponseEntity<String> getShipmentPrediction(@RequestParam int fragilePercentage, @RequestParam int foodPercentage, @RequestParam int liquidPercentage) {
+        // Input validation
+        if(fragilePercentage < 0 || fragilePercentage > 100 ||
+            foodPercentage < 0 || foodPercentage > 100 ||
+            liquidPercentage < 0 || liquidPercentage > 100) {
+            return ResponseEntity.badRequest().body("Percentages should be between 0 and 100.");
+        }
 
-        return inputShipment.getSafetyScore();
+        try {
+            Shipment inputShipment = new Shipment(fragilePercentage, foodPercentage, liquidPercentage);
+            double safetyScore = inputShipment.getSafetyScore();
+            return ResponseEntity.ok("Safety Score: " + safetyScore);
+        } catch(IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/predict-weatherScore")
+    public ResponseEntity<Integer> getWeatherScore(@RequestParam String weatherDescription) {
+        try {
+            Weather weather = new Weather(weatherDescription);
+            int weatherScore = weather.getWeatherScore();
+            return ResponseEntity.ok(weatherScore);
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body(-1); // Error handling if needed
+        }
     }
 
     @PutMapping("/{id}")
