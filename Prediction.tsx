@@ -36,7 +36,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
 
   const Stack = createStackNavigator();
   const navigateToPoly = () => {
-    navigation.navigate("Poly"); // "Road" should match the name of your "Road" screen in the navigator
+    navigation.navigate("Poly");
   };
   return (
     <ImageBackground

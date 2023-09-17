@@ -72,14 +72,14 @@ function decodePolyline(encoded: string) {
 
 export default function Poly() {
   const [region, setRegion] = useState({
-    latitude: 37.78825, // default latitude
-    longitude: -122.4324, // default longitude
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: 37.2296,
+    longitude: 80.4139,
+    latitudeDelta: 37.2296,
+    longitudeDelta: 80.4139,
   });
   const [routeCoords, setRouteCoords] = useState<Coordinate[]>([]);
-  const [originInput, setOriginInput] = useState<string>(""); // For inputting origin
-  const [destinationInput, setDestinationInput] = useState<string>(""); // For inputting destination
+  const [originInput, setOriginInput] = useState<string>("");
+  const [destinationInput, setDestinationInput] = useState<string>("");
 
   useEffect(() => {
     (async () => {
@@ -93,8 +93,8 @@ export default function Poly() {
       setRegion({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.0922, // You might want to adjust these deltas
-        longitudeDelta: 0.0421,
+        latitudeDelta: 37.2296,
+        longitudeDelta: 80.4139,
       });
     })();
   }, []);
@@ -116,10 +116,8 @@ export default function Poly() {
         let coords = decodePolyline(points);
         setRouteCoords(coords);
 
-        // Extract the destination coordinates from the API response
         const endDestination = json.routes[0].legs[0].end_location;
 
-        // Adjust the map's view to focus on the destination coordinates
         setRegion({
           latitude: endDestination.lat,
           longitude: endDestination.lng,
@@ -177,12 +175,11 @@ export default function Poly() {
           placeholder="Enter starting address"
           minLength={2}
           textInputProps={{
-            autoFocus: false, // autofocus is set to false
-            returnKeyType: "next", // when the user presses the "next" button on the keyboard, it can move to the next input
+            autoFocus: false,
+            returnKeyType: "next",
           }}
           fetchDetails={true}
           onPress={(data, details = null) => {
-            // Handle starting address selection
             setOriginInput(data.description);
           }}
           query={{
@@ -195,12 +192,11 @@ export default function Poly() {
           placeholder="Enter destination address"
           minLength={2}
           textInputProps={{
-            autoFocus: false, // autofocus is set to false
-            returnKeyType: "done", // indicates the user is done with input
+            autoFocus: false,
+            returnKeyType: "done",
           }}
           fetchDetails={true}
           onPress={(data, details = null) => {
-            // Handle destination address selection
             setDestinationInput(data.description);
           }}
           query={{
@@ -225,7 +221,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 5,
     width: 350,
-    alignSelf: "center", // This will center the inputContainer horizontally
+    alignSelf: "center",
     flexDirection: "column",
   },
   map: {

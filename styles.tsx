@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_700Bold",
     color: "#FF6B6B",
-    textShadowColor: "rgba(0, 0, 0, 0.1)", // Shadow
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
   },
@@ -47,8 +47,8 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     paddingVertical: 8,
     paddingHorizontal: 20,
-    borderRadius: 20, // Rounded corners
-    shadowColor: "#000", // For iOS: shadow properties
+    borderRadius: 20,
+    shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 0,
@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Poppins_400Regular",
     fontSize: 30,
     color: "white",
-    shadowColor: "#000", // For iOS: shadow properties
+    shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 0,
@@ -113,8 +113,8 @@ export const styles = StyleSheet.create({
   },
   capCircle: {
     flexDirection: "column",
-    alignItems: "center", 
-    justifyContent: "center", 
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
     marginTop: 15,
   },
