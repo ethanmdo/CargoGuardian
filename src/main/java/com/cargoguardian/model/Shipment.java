@@ -6,65 +6,49 @@ public class Shipment {
     private int foodItemContentPercentage;
     private int liquidItemContentPercentage;
 
-    private int foodItemContentPercentageContentPercentage;
-    
-    public Shipment(int fragPercent, int foodPercent, int liquidPercent)
-    {
-        this.fragileContentPercentage = fragPercent;
+    // Constructor
+    public Shipment(int fragilePercent, int foodPercent, int liquidPercent) {
+        this.fragileContentPercentage = fragilePercent;
         this.foodItemContentPercentage = foodPercent;
         this.liquidItemContentPercentage = liquidPercent;
     }
 
-    public int getFragileContentPercentage()
-    {
-        return this.fragileContentPercentage;
+    // Getters and Setters
+    public int getFragileContentPercentage() {
+        return fragileContentPercentage;
     }
 
-    public void setFragileContentPercentage(int newPercent)
-    {
-        this.fragileContentPercentage = newPercent;
+    public void setFragileContentPercentage(int fragileContentPercentage) {
+        this.fragileContentPercentage = fragileContentPercentage;
     }
 
-    public int getfoodItemContentPercentage()
-    {
-        return this.foodItemContentPercentage;
+    public int getFoodItemContentPercentage() {
+        return foodItemContentPercentage;
     }
 
-    public void setfoodItemContentPercentage(int newPercent)
-    {
-        this.foodItemContentPercentage = newPercent;
+    public void setFoodItemContentPercentage(int foodItemContentPercentage) {
+        this.foodItemContentPercentage = foodItemContentPercentage;
     }
 
-    public int getLiquidItemContentPercentage()
-    {
-        return this.liquidItemContentPercentage;
+    public int getLiquidItemContentPercentage() {
+        return liquidItemContentPercentage;
     }
 
-    public void setLiquidItemContentPercentage(int newPercent)
-    {
-        this.liquidItemContentPercentage = newPercent;
+    public void setLiquidItemContentPercentage(int liquidItemContentPercentage) {
+        this.liquidItemContentPercentage = liquidItemContentPercentage;
     }
 
-    public double getSafetyScore()
-    {
-
-        if (this.getFragileContentPercentage() + this.getfoodItemContentPercentage() + this.getLiquidItemContentPercentage() != 100)
-        {
-            throw new IllegalArgumentException("Please enter percentage values amounting to 100");
+    // Safety score method
+    public double getSafetyScore() {
+        if (getFragileContentPercentage() + getFoodItemContentPercentage() + getLiquidItemContentPercentage() != 100) {
+            throw new IllegalArgumentException("Please ensure the percentages sum up to 100");
         }
 
         double defaultScore = 100.0;
+        defaultScore -= getFragileContentPercentage() * 0.5;
+        defaultScore -= getFoodItemContentPercentage() * 0.15;
+        defaultScore -= getLiquidItemContentPercentage() * 0.15;
 
-        defaultScore = defaultScore - this.getFragileContentPercentage() * 0.5;
-        defaultScore = defaultScore - this.getfoodItemContentPercentage() * 0.15;
-        defaultScore = defaultScore - this.getLiquidItemContentPercentage() * 0.15;
-
-        if (defaultScore < 0)
-        {
-            defaultScore = 0;
-        }
-
-        return defaultScore;
+        return Math.max(defaultScore, 0);  // This ensures the score doesn't go below 0
     }
-
 }
