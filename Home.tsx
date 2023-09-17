@@ -12,37 +12,82 @@ import { styles } from "./styles";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ImageBackground } from "react-native";
+import Poly from "./Poly";
 
 const HomeScreen: React.FC = ({ navigation }: any) => {
   const [shipmentContent, setShipmentContent] = useState<string>("");
-  const [route, setRoute] = useState<string>("");
-  const [weather, setWeather] = useState<string>("");
+  const [city, setCity] = useState<string>("");
   const [prediction, setPrediction] = useState<string>("");
 
-  const getRiskPrediction = async () => {
+  // const getRiskPrediction = async () => {
+  //   try {
+  //     const response = await axios.post<string>(
+  //       "http://localhost:8081/predict-risk",
+  //       {
+  //         shipmentContent,
+  //         cityConditions: city,
+  //       }
+  //     );
+  //     setPrediction(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching prediction:", error);
+  //   }
+  // };
+  const getShipmentScore = async () => {
     try {
-      const response = await axios.post<string>(
-        "http://localhost:8080/shipments/predict-risk",
-        {
-          shipmentContent,
-          route,
-          weatherConditions: weather,
-        }
-      );
-      setPrediction(response.data);
-    } catch (error) {
-      console.error("Error fetching prediction:", error);
+    const response = await fetch(
+    `http://localhost:8081/shipments/predict-shipmentRisk`,
+    {
+    method: "POST",
+    headers: {
+    "Content-Type": "text/plain",
+    },
+    body: shipmentContent, // Assuming shipmentContent holds the string
     }
-  };
+    );
+    
+    
+    if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    
+    const shipmentScore = await response.text(); // Parse the plain text response
+    
+    
+    // Set the shipment score state
+    setShipmentContent(shipmentScore);
+    } catch (error) {
+    console.error("Error fetching shipment score:", error);
+    }
+    };
+    
+  // const getCity = async () => {
+  //   try {
+  //     const response = await axios.get<string>(
+  //       "http://localhost:8081/fetch-city"
+  //     );
+  //     setCity(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching city:", error);
+  //   }
+  // };
 
   const press = async () => {
-    if (!shipmentContent || !route || !weather) {
+    await getShipmentScore();
+    //await getCity();
+
+    if (!shipmentContent || !city) {
       alert("Please fill out all the boxes before proceeding.");
       return;
     }
 
-    await getRiskPrediction();
-    navigation.navigate("Prediction", { predictionData: prediction });
+    //await getCity();
+    navigation.navigate("Prediction", {
+      predictionData: prediction,
+      shipmentContent: shipmentContent,
+      city: city,
+    });
   };
 
   return (
@@ -60,19 +105,15 @@ const HomeScreen: React.FC = ({ navigation }: any) => {
               value={shipmentContent}
               onChangeText={(text) => setShipmentContent(text)}
             />
+            <Text style={styles.inputCap}>
+              Fragile, Food, Liquid: Format As "XX,XX,XX" And Should Add To 100
+            </Text>
             <TextInput
               style={styles.input}
-              placeholder="Route"
-              value={route}
-              onChangeText={(text) => setRoute(text)}
+              placeholder="City"
+              value={city}
+              onChangeText={(text) => setCity(text)}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Weather Conditions"
-              value={weather}
-              onChangeText={(text) => setWeather(text)}
-            />
-
             <TouchableOpacity style={styles.button} onPress={press}>
               <Text style={styles.buttonText}>Predict Risk</Text>
             </TouchableOpacity>
