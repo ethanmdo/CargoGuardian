@@ -43,9 +43,14 @@ public class ShipmentController {
         }
     }
     @GetMapping("/predict-risk")
-    public String getPrediction() {
+    public String getPrediction(@RequestParam String location) {
         String apiKey = "59786d29bea323a72ae2853ab7e40e91";
-        String uri = "https://api.openweathermap.org/data/2.5/forecast?q=Blacksburg&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
+        String uri = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
+
+        if (location == null)
+        {
+            url = "https://api.openweathermap.org/data/2.5/forecast?q=Blacksburg&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
+        }
 
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -70,6 +75,7 @@ public class ShipmentController {
 
             String weather = asJsonObject.get("list").getAsJsonArray().get(0).getAsJsonObject().get("weather").getAsJsonArray().get(0).getAsJsonObject().get("main").getAsString();
 
+
             // jsonArray is what you parse
             return "Weather: " + weather;
 
@@ -77,6 +83,14 @@ public class ShipmentController {
 
         }
         return null;
+    }
+
+    @GetMapping("/predict-risk")
+    public double getPrediction2(@RequestParam int fragile, @RequestParam int food, @RequestParam int liquid)
+    {
+        Shipment inputShipment = new Shipment(fragile, food, liquid);
+
+        return inputShipment.getSafetyScore();
     }
 
     @PutMapping("/{id}")
