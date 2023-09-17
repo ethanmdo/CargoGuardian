@@ -1,10 +1,26 @@
 package com.cargoguardian.controller;
 
 import com.cargoguardian.model.Shipment;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/shipments")
@@ -18,13 +34,49 @@ public class ShipmentController {
         return "Shipment created successfully";
     }
 
-    @GetMapping("/predict-risk")
+    @GetMapping("/predict-riskby")
     public Shipment getShipment(@PathVariable int id) {
         if (id >= 0 && id < shipments.size()) {
             return shipments.get(id);
         } else {
             throw new ShipmentNotFoundException("Shipment not found with id: " + id);
         }
+    }
+    @GetMapping("/predict-risk")
+    public String getPrediction() {
+        String apiKey = "59786d29bea323a72ae2853ab7e40e91";
+        String uri = "https://api.openweathermap.org/data/2.5/forecast?q=Blacksburg&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+
+            URL url = new URL(uri);
+            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+
+            http.setRequestProperty("Accept", "application/json");
+            http.setRequestProperty(
+                HttpHeaders.AUTHORIZATION, String.format("Bearer %s", apiKey));
+
+            ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+
+
+            String responseBody = new String(response.getBody().getBytes(), StandardCharsets.UTF_8);
+
+            JsonParser jsonParser = new JsonParser();
+
+            JsonElement jsonObject = jsonParser.parseString(responseBody);
+
+            JsonObject asJsonObject = jsonObject.getAsJsonObject();
+
+            String weather = asJsonObject.get("list").getAsJsonArray().get(0).getAsJsonObject().get("weather").getAsJsonArray().get(0).getAsJsonObject().get("main").getAsString();
+
+            // jsonArray is what you parse
+            return "Weather: " + weather;
+
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 
     @PutMapping("/{id}")
