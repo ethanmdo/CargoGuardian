@@ -2,9 +2,9 @@ package com.cargoguardian.model;
 
 public class Shipment {
 
-    private fragileContentPercentage;
-    private foodItemContentPercentage;
-    private liquidItemContentPercentage;
+    private int fragileContentPercentage;
+    private int foodItemContentPercentage;
+    private int liquidItemContentPercentage;
     
     public Shipment(int fragPercent, int foodPercent, int liquidPercent)
     {
@@ -30,7 +30,7 @@ public class Shipment {
 
     public void setfoodItemContentPercentage(int newPercent)
     {
-        this.foodItemContentPercentageContentPercentage = newPercent;
+        this.foodItemContentPercentage = newPercent;
     }
 
     public int getLiquidItemContentPercentage()
@@ -53,9 +53,9 @@ public class Shipment {
 
         double defaultScore = 100.0;
 
-        defaultScore = defaultScore - this.getFragileContentPercentage * 0.5;
-        defaultScore = defaultScore - this.getfoodItemContentPercentage * 0.15;
-        defaultScore = defaultScore - this.getLiquidItemContentPercentage * 0.15;
+        defaultScore = defaultScore - this.getFragileContentPercentage() * 0.5;
+        defaultScore = defaultScore - this.getfoodItemContentPercentage() * 0.15;
+        defaultScore = defaultScore - this.getLiquidItemContentPercentage() * 0.15;
 
         if (defaultScore < 0)
         {
