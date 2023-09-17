@@ -45,7 +45,7 @@ public class ShipmentController {
     @GetMapping("/predict-weatherRisk")
     public String getWeatherPrediction(@RequestParam String location) {
         String apiKey = "59786d29bea323a72ae2853ab7e40e91";
-        String uri = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&appid=59786d29bea323a72ae2853ab7e40e91&units=metric";
 
         if (location == null)
         {
@@ -55,14 +55,14 @@ public class ShipmentController {
         try {
             RestTemplate restTemplate = new RestTemplate();
 
-            URL url = new URL(uri);
-            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            URL weatherUrl = new URL(url);
+            HttpURLConnection http = (HttpURLConnection)weatherUrl.openConnection();
 
             http.setRequestProperty("Accept", "application/json");
             http.setRequestProperty(
                 HttpHeaders.AUTHORIZATION, String.format("Bearer %s", apiKey));
 
-            ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
 
             String responseBody = new String(Objects.requireNonNull(response.getBody()).getBytes(), StandardCharsets.UTF_8);
@@ -80,9 +80,9 @@ public class ShipmentController {
             return "Weather: " + weather;
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ShipmentNotFoundException("Shipment not found");
         }
-        return null;
+
     }
 
     @GetMapping("/predict-shipmentRisk")
