@@ -24,7 +24,6 @@ type PredictionRouteParams = {
 const Prediction: React.FC = ({ navigation }: any) => {
   const topPercentage = "25%";
 
-
   const route =
     useRoute<RouteProp<{ Prediction: PredictionRouteParams }, "Prediction">>();
   const {
@@ -50,6 +49,7 @@ const Prediction: React.FC = ({ navigation }: any) => {
             <Text style={styles.circleText}>{predictionData}</Text>
           </View>
         </View>
+
         <View style={styles.bottomCirclesContainer}>
           <View style={styles.capCircle}>
             <Text style={styles.bCircleCaption}>Shipment Content</Text>
@@ -76,6 +76,15 @@ const Prediction: React.FC = ({ navigation }: any) => {
               </View>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={navigateToPoly}>
+            <Text style={styles.buttonText}>See Weather</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={navigateToPoly}>
+            <Text style={styles.buttonText}>See Map</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>

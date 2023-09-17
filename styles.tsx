@@ -22,9 +22,10 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_700Bold",
     color: "#FF6B6B",
-    textShadowColor: "rgba(0, 0, 0, 0.1)",
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 0,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 0,
   },
   inputContainer: {
     flex: 2,
@@ -55,7 +56,12 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "Poppins_400Regular",
     fontSize: 18,
-    color: "black",
+    color: "white",
+    textAlign: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 0,
   },
 
   circleCaption: {
@@ -102,6 +108,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 30,
   },
   bottomCirclesContainer: {
     flex: 1,
@@ -115,5 +122,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     marginTop: 15,
+  },
+  buttonContainer: {
+  
+    width: 350,
+    alignSelf: "center",
+    flexDirection: "column",
+    marginBottom: 10,
   },
 });
