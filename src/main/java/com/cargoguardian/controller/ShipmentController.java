@@ -65,11 +65,11 @@ public class ShipmentController {
             ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
 
 
-            String responseBody = new String(response.getBody().getBytes(), StandardCharsets.UTF_8);
+            String responseBody = new String(Objects.requireNonNull(response.getBody()).getBytes(), StandardCharsets.UTF_8);
 
             JsonParser jsonParser = new JsonParser();
 
-            JsonElement jsonObject = jsonParser.parseString(responseBody);
+            JsonElement jsonObject = JsonParser.parseString(responseBody);
 
             JsonObject asJsonObject = jsonObject.getAsJsonObject();
 
@@ -80,7 +80,7 @@ public class ShipmentController {
             return "Weather: " + weather;
 
         } catch (Exception e) {
-
+            throw new RuntimeException(e);
         }
         return null;
     }
